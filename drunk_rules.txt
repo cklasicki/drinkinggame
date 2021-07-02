@@ -6,4 +6,4 @@
                         (contestant_weight)
 
 3. When the drunk level is higher than 0,05 than the contestant is out of the game.
-4. The game wins to only contestant left
+4. The game is won by the contestant that has stayed as the only one
