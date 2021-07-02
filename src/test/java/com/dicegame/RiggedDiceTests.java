@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Unit tests for a Drinking game.
+ * Unit tests to check the RiggedDice implementation.
  */
 
 public class RiggedDiceTests 
