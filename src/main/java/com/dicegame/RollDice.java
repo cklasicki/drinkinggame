@@ -45,6 +45,8 @@ public class RollDice {
 
     /**
      * Inner class for building RollDice object.
+     * Default value for number of throws is 1.
+     * You can overwrite it with buildTrowNumbers() method.
      */
 
     public static class RollDiceBuilder {
