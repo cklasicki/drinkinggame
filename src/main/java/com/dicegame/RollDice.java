@@ -8,27 +8,31 @@ public class RollDice {
     private Dice dice;
     private int throwsNumber;
 
-    /**
-     * Constructor to create RollDice object
-     *
-     * @param dice         implementation for Dice interface
-     * @param throwsNumber number of throws
-     */
+    private RollDice(RollDiceBuilder rollDiceBuilder) {
+        this.dice = rollDiceBuilder.dice;
+        this.throwsNumber = rollDiceBuilder.throwsNumber;
+    }
 
-    public RollDice(Dice dice, int throwsNumber) {
-        if (dice == null || throwsNumber <= 0) {
-            throw new IllegalArgumentException("Wrong data");
-        }
-        this.dice = dice;
-        this.throwsNumber = throwsNumber;
+    public Dice getDice() {
+        return dice;
+    }
+
+    public int getThrowsNumber() {
+        return throwsNumber;
     }
 
     /**
-     * Method that returns array of throw results
+     *  Method that returns result of dice roll.
+     *  When dice object is null, IllegalArgumentException
+     *  will be thrown.
+     * @return array of results for rolling dice
      *
-     * @return array of rolling dice results
      */
+
     public int[] getResults() {
+        if (dice == null) {
+            throw new IllegalArgumentException("Wrong data");
+        }
 
         int[] results = new int[throwsNumber];
 
@@ -38,4 +42,31 @@ public class RollDice {
 
         return results;
     }
+
+    /**
+     * Inner class for building RollDice object.
+     */
+
+    public static class RollDiceBuilder {
+        private Dice dice;
+        private int throwsNumber;
+
+        public RollDiceBuilder buildDice(Dice dice) {
+            this.dice = dice;
+            return this;
+        }
+
+        public RollDiceBuilder buildThrowNumbers(int throwsNumber) {
+            if (throwsNumber <= 0) {
+                throwsNumber = 1;
+            }
+            this.throwsNumber = throwsNumber;
+            return this;
+        }
+
+        public RollDice build() {
+            return new RollDice(this);
+        }
+    }
+
 }

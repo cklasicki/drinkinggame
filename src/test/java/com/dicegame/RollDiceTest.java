@@ -3,32 +3,30 @@ package com.dicegame;
 import static org.hamcrest.core.Is.is;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
- *  Unit tests for a Drinking game.
+ * Unit tests for a Drinking game.
  */
 public class RollDiceTest {
 
-    private RollDice rollDice;
     private Dice dice;
     private int throwsNumber;
 
-    @Before
-    public void init() {
-        dice = () -> 4;
-    }
 
     @Test
     public void should_return_array_with_1_element_for_1_roll() {
 
         //given
+        dice = () -> 4;
         throwsNumber = 1;
-        rollDice = new RollDice(dice,throwsNumber);
+        RollDice rollDice = new RollDice.RollDiceBuilder()
+            .buildDice(dice)
+            .buildThrowNumbers(throwsNumber)
+            .build();
 
         //when
-        int [] rollResults =  rollDice.getResults();
+        int[] rollResults = rollDice.getResults();
 
         //then
         MatcherAssert.assertThat(rollResults[0], is(4));
@@ -39,11 +37,15 @@ public class RollDiceTest {
     public void should_return_array_with_2_element_for_2_rolls() {
 
         //given
+        dice = () -> 4;
         throwsNumber = 2;
-        rollDice = new RollDice(dice,throwsNumber);
+        RollDice rollDice = new RollDice.RollDiceBuilder()
+            .buildDice(dice)
+            .buildThrowNumbers(throwsNumber)
+            .build();
 
         //when
-        int [] rollResults =  rollDice.getResults();
+        int[] rollResults = rollDice.getResults();
 
         //then
         MatcherAssert.assertThat(rollResults[0], is(4));
@@ -52,28 +54,36 @@ public class RollDiceTest {
 
     }
 
+    @Test
+    public void should_return_array_with_1_element_when_throw_number_is_0() {
+
+        //given
+        dice = () -> 4;
+        throwsNumber = 0;
+        RollDice rollDice = new RollDice.RollDiceBuilder()
+            .buildDice(dice)
+            .buildThrowNumbers(throwsNumber)
+            .build();
+
+        //when
+        int[] rollResults = rollDice.getResults();
+
+        //then
+        MatcherAssert.assertThat(rollResults[0], is(4));
+        MatcherAssert.assertThat(rollDice.getThrowsNumber(), is(1));
+        MatcherAssert.assertThat(rollResults.length, is(1));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void should_throw_IllegalArgumentException_when_dice_object_is_null() {
 
         //given
         throwsNumber = 1;
-        rollDice = new RollDice(null,throwsNumber);
+        RollDice rollDice = new RollDice.RollDiceBuilder()
+            .buildThrowNumbers(throwsNumber)
+            .build();
+
+        //when
+        rollDice.getResults();
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void should_throw_IllegalArgumentException_when_throw_number_is_0() {
-
-        //given
-        throwsNumber = 0;
-        rollDice = new RollDice(dice,throwsNumber);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void should_throw_IllegalArgumentException_when_throw_number_is_lower_than_0() {
-
-        //given
-        throwsNumber = -1;
-        rollDice = new RollDice(dice,throwsNumber);
-    }
-
 }
