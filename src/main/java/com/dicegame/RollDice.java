@@ -51,15 +51,12 @@ public class RollDice {
         private Dice dice;
         private int throwsNumber;
 
-        public RollDiceBuilder buildDice(Dice dice) {
+        public RollDiceBuilder(Dice dice) {
             this.dice = dice;
-            return this;
+            this.throwsNumber = 1;
         }
 
         public RollDiceBuilder buildThrowNumbers(int throwsNumber) {
-            if (throwsNumber <= 0) {
-                throwsNumber = 1;
-            }
             this.throwsNumber = throwsNumber;
             return this;
         }
