@@ -1,7 +1,7 @@
 package com.dicegame;
 
 /**
- *  Class that represents a result of rolling dice
+ * Class that represents a result of rolling dice
  */
 
 public class RollDice {
@@ -10,17 +10,22 @@ public class RollDice {
 
     /**
      * Constructor to create RollDice object
-     * @param dice implementation for Dice interface
+     *
+     * @param dice         implementation for Dice interface
      * @param throwsNumber number of throws
      */
 
     public RollDice(Dice dice, int throwsNumber) {
+        if (dice == null || throwsNumber <= 0) {
+            throw new IllegalArgumentException("Wrong data");
+        }
         this.dice = dice;
         this.throwsNumber = throwsNumber;
     }
 
     /**
      * Method that returns array of throw results
+     *
      * @return array of rolling dice results
      */
     public int[] getResults() {
