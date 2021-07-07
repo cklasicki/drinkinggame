@@ -4,8 +4,10 @@ package com.dicegame;
 import static org.hamcrest.Matchers.is;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Init tests for a Drinking game.
@@ -17,7 +19,7 @@ public class PickContestantImplTest {
     private Contestant[] contestants;
 
 
-    @Before
+    @BeforeEach
     public void init() {
         pickContestantStrategy = new PickContestantStrategyImpl();
         contestants = new Contestant[2];
@@ -68,47 +70,43 @@ public class PickContestantImplTest {
         MatcherAssert.assertThat(contestant.getName(), is(contestants[0].getName()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void should_throw_IllegalArgumentException_when_array_of_contestants_is_null() {
 
         //given
-        contestants = null;
+        //when
         int turn = 1;
 
-        //when
-        Contestant contestant = pickContestantStrategy.nextContestant(contestants,turn);
-
         //assert
-        MatcherAssert.assertThat(contestant.getName(), is(contestants[0].getName()));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> pickContestantStrategy.nextContestant(null,turn));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void should_throw_IllegalArgumentException_when_turn_value_is_equal_zero() {
 
         //given
+        //when
         contestants[0] = new Contestant("Czarek", 81.4f);
         contestants[1] = new Contestant("Marcin", 74.3f);
         int turn = 0;
 
-        //when
-        Contestant contestant = pickContestantStrategy.nextContestant(contestants,turn);
-
         //assert
-        MatcherAssert.assertThat(contestant.getName(), is(contestants[0].getName()));
+        Assertions.assertThrows(IllegalArgumentException.class,
+            () -> pickContestantStrategy.nextContestant(contestants,turn));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void should_throw_IllegalArgumentException_when_turn_value_is_lower_than_zero() {
 
         //given
+        //when
         contestants[0] = new Contestant("Czarek", 81.4f);
         contestants[1] = new Contestant("Marcin", 74.3f);
         int turn = -1;
 
-        //when
-        Contestant contestant = pickContestantStrategy.nextContestant(contestants,turn);
-
         //assert
-        MatcherAssert.assertThat(contestant.getName(), is(contestants[0].getName()));
+        Assertions.assertThrows(IllegalArgumentException.class,
+            () -> pickContestantStrategy.nextContestant(contestants,turn));
     }
 }
