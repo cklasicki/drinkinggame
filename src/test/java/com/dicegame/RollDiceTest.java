@@ -3,7 +3,9 @@ package com.dicegame;
 import static org.hamcrest.core.Is.is;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Unit tests for a Drinking game.
@@ -23,7 +25,7 @@ public class RollDiceTest {
         //when
         int[] rollResults = rollDice.getResults();
 
-        //then
+        //assert
         MatcherAssert.assertThat(rollResults[0], is(4));
         MatcherAssert.assertThat(rollResults.length, is(1));
     }
@@ -41,7 +43,7 @@ public class RollDiceTest {
         //when
         int[] rollResults = rollDice.getResults();
 
-        //then
+        //assert
         MatcherAssert.assertThat(rollResults[0], is(4));
         MatcherAssert.assertThat(rollResults.length, is(1));
     }
@@ -59,21 +61,22 @@ public class RollDiceTest {
         //when
         int[] rollResults = rollDice.getResults();
 
-        //then
+        //assert
         MatcherAssert.assertThat(rollResults[0], is(4));
         MatcherAssert.assertThat(rollResults[1], is(4));
         MatcherAssert.assertThat(rollResults.length, is(2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void should_throw_IllegalArgumentException_when_dice_object_is_null() {
 
         //given
+        //when
         RollDice rollDice = new RollDice.RollDiceBuilder(null).build();
 
-        //when
-        //then
-        rollDice.getResults();
+       //assert
+        Assertions.assertThrows(IllegalArgumentException.class, rollDice::getResults);
+
     }
 
 }

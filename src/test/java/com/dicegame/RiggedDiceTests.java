@@ -3,8 +3,9 @@ package com.dicegame;
 import static org.hamcrest.Matchers.is;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Unit tests for a Drinking game.
@@ -14,7 +15,7 @@ public class RiggedDiceTests
 {
     private Dice dice;
 
-    @Before
+    @BeforeEach
     public void init() {
         dice = RiggedDice.create(new int[][]{{4,2},{5,3}});
     }
