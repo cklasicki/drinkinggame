@@ -2,5 +2,5 @@ package com.dicegame;
 
 public interface RollDiceStrategy {
 
-    RollDice diceRoll(int numberOfRolls);
+    RollDice diceRoll(Dice dice, int numberOfRolls);
 }

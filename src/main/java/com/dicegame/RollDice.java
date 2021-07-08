@@ -5,6 +5,7 @@ package com.dicegame;
  */
 
 public class RollDice {
+
     private Dice dice;
     private int throwsNumber;
 
