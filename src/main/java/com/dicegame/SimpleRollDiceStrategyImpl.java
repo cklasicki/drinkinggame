@@ -11,12 +11,8 @@ public class SimpleRollDiceStrategyImpl implements RollDiceStrategy {
             throw new IllegalArgumentException("Wrong data");
         }
 
-        RollDice rollDice = new RollDice.RollDiceBuilder(dice)
+        return new RollDice.RollDiceBuilder(dice)
             .buildThrowNumbers(numberOfRolls)
             .build();
-
-        int[] result = rollDice.getResults();
-
-        return rollDice;
     }
 }
