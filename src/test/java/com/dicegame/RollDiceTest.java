@@ -74,9 +74,23 @@ public class RollDiceTest {
         //when
         RollDice rollDice = new RollDice.RollDiceBuilder(null).build();
 
-       //assert
+        //assert
         Assertions.assertThrows(IllegalArgumentException.class, rollDice::getResults);
 
     }
+
+    @Test
+    public void should_throw_IllegalArgumentException_when_number_of_throws_is_0() {
+
+        //given
+        //when
+        dice = () -> 4;
+
+        //assert
+        Assertions.assertThrows(IllegalArgumentException.class,
+                            () -> new RollDice.RollDiceBuilder(dice).buildThrowNumbers(0).build());
+
+    }
+
 
 }

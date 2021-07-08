@@ -7,7 +7,7 @@ public class SimpleRollDiceStrategyImpl implements RollDiceStrategy {
     @Override
     public RollDice diceRoll(Dice dice, int numberOfRolls) {
 
-        if (Objects.isNull(dice) || numberOfRolls <= 0) {
+        if (Objects.isNull(dice)) {
             throw new IllegalArgumentException("Wrong data");
         }
 
