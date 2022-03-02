@@ -5,6 +5,7 @@ package com.dicegame;
  */
 
 public class RollDice {
+
     private Dice dice;
     private int throwsNumber;
 
@@ -64,6 +65,9 @@ public class RollDice {
         }
 
         public RollDice build() {
+            if (throwsNumber == 0) {
+               throw new IllegalArgumentException("Number of throws must be greater than 0");
+            }
             return new RollDice(this);
         }
     }
