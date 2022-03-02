@@ -1,0 +1,9 @@
+1. Each contestant when looses needs to drink a shot
+2. The level of drunkness is indicated by a formula:
+
+                   (number_of_shots) * (shot_amount) 
+    drunkLevel = -------------------------------------
+                        (contestant_weight)
+
+3. When the drunk level is higher than 0,05 than the contestant is out of the game.
+4. The game is won by the contestant that has stayed as the only one

@@ -93,4 +93,34 @@ public class AppTest {
         MatcherAssert.assertThat(turn5result.getWon(), is(true));
 
     }
+
+    @Test
+    public void test_if_drunk() {
+
+        // given
+        dice = RiggedDice.create(new int[][] { { 3, 4 }, { 1, 3 } });
+        Contestant czarek = new Contestant("Czarek", 80f);
+        Contestant marcin = new Contestant("Marcin", 70f);
+
+        // when
+        DrinkingGame game = new DrinkingGame(dice, marcin, czarek);
+
+        for (int i = 0; i < 10; i++) {
+            game.playNextTurn(); // omit 10 turns
+        }
+
+        Result throwResult_1 = game.playNextTurn();
+        DrunkResult drunkResult_1 = game.checkIfDrunk(throwResult_1);
+
+        Result throwResult_2 = game.playNextTurn();
+        DrunkResult drunkResult_2 = game.checkIfDrunk(throwResult_2);
+        
+        MatcherAssert.assertThat(drunkResult_1.getContestant(), is(marcin));
+        MatcherAssert.assertThat(drunkResult_1.isDrunk(), is(false));
+        MatcherAssert.assertThat(drunkResult_2.getContestant(), is(czarek));
+        MatcherAssert.assertThat(drunkResult_2.isDrunk(), is(true));
+
+        MatcherAssert.assertThat(game.winnerIs(), is("Marcin"));
+
+    }
 }

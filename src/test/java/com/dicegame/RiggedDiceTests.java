@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Unit tests for a Drinking game.
+ * Unit tests to check the RiggedDice implementation.
  */
 
 public class RiggedDiceTests 
